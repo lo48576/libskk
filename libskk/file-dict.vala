@@ -130,12 +130,13 @@ namespace Skk {
                     "no okuri-ari boundary");
             }
             okuri_ari_offset = offset;
-            
+
             if (!read_until (ref offset, ";; okuri-nasi entries.\n")) {
-                throw new SkkDictError.MALFORMED_INPUT (
-                    "no okuri-nasi boundary");
+                // No okuri-nasi boundary.
+                okuri_nasi_offset = (long) mmap.length;
+            } else {
+                okuri_nasi_offset = offset;
             }
-            okuri_nasi_offset = offset;
         }
 
         /**
